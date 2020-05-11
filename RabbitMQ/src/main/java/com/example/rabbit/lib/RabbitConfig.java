@@ -67,11 +67,12 @@ public class RabbitConfig {
         CachingConnectionFactory connectionFactory =new CachingConnectionFactory(this.host, this.port);
         connectionFactory.setUsername(this.user);
         connectionFactory.setPassword(this.password);
-//        connectionFactory.setConnectionTimeout();
-//        if(!StringUtils.isEmpty(this.virtualHost)) {
-//            connectionFactory.setVirtualHost(this.virtualHost);
-//        }
-
+        connectionFactory.setPublisherReturns(true);
+//        connectionFactory.setChannelListeners(Collections.singletonList((channel, transactional) ->
+//                {
+//                    logger.info("tetetete");
+//                }
+//        ));
         return connectionFactory;
     }
 
@@ -81,9 +82,21 @@ public class RabbitConfig {
     public RabbitTemplate rabbitTemplate() {
         RabbitTemplate template = new RabbitTemplate(connectionFactory());
         template.setRetryTemplate(retryTemplate() );
-        //template.setRecoveryCallback();
+        var rabbitTemplate =  new RabbitTemplate(connectionFactory());
 
-        return new RabbitTemplate(connectionFactory());
+        rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
+            if (!ack) {
+                logger.info("sender not send message to the right exchange" + " correlationData=" + correlationData + " ack=" + ack + " cause" + cause);
+            } else {
+                logger.info("sender send message to the right exchange" + " correlationData=" + correlationData + " ack=" + ack + " cause" + cause);
+            }
+        });
+
+        rabbitTemplate.setReturnCallback((message, replyCode, replyText, tmpExchange, tmpRoutingKey) -> {
+            logger.info("Sender send message failed: " + message + " " + replyCode + " " + replyText + " " + tmpExchange + " " + tmpRoutingKey);
+        });
+
+        return rabbitTemplate;
     }
 
 

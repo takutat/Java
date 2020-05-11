@@ -30,10 +30,10 @@ public class Consumer {
     @SendTo("sample-queue")
     public Message<String> receive(String message, @Header(AmqpHeaders.REPLY_TO) String replyTo) throws Exception {
 
-        Thread.sleep(300000);
+//        Thread.sleep(300000);
         try {
             logger.info("Response" + message + " 開始");
-//        throw new Exception("ほげ");
+//            throw new Exception("ほげ");
             var responseMessage = message + ":応答テスト2";
 
             // 応答返却
