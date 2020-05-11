@@ -1,10 +1,10 @@
-logging:
-  level:
-    com.example.rabbit: DEBUG
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
-  file: /var/log/application.log
+#logging:
+#  level:
+#    com.example.rabbit: DEBUG
+#  pattern:
+#    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+#    file: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+#  file: /var/log/application.log
 rabbitConfig:
   host: 127.0.0.1
 #  host: 192.168.22.222

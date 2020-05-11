@@ -1,8 +1,8 @@
 package com.example.rabbit.lib;
 
 import lombok.Data;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.rabbit.AsyncRabbitTemplate;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.amqp.rabbit.config.RetryInterceptorBuilder;
@@ -25,7 +25,8 @@ public class RabbitConfig {
     /**
      * ログ出力
      */
-    private Logger logger = LoggerFactory.getLogger(RabbitConfig.class);
+    protected final Log logger = LogFactory.getLog(RabbitConfig.class);
+
     /**
      * ホスト
      */

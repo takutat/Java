@@ -2,8 +2,8 @@ package com.example.rabbit.lib;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.core.MessageBuilder;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.AsyncRabbitTemplate;
@@ -12,7 +12,6 @@ import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import javax.validation.constraints.NotNull;
 import java.nio.charset.StandardCharsets;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 @RequiredArgsConstructor
 @Getter
@@ -21,7 +20,7 @@ public class Producer {
     /**
      * ログ出力
      */
-    private Logger logger = LoggerFactory.getLogger(Producer.class);
+    protected final Log logger = LogFactory.getLog(Producer.class);
 
     /**
      * 環境変数

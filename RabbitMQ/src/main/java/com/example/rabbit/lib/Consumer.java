@@ -2,8 +2,8 @@ package com.example.rabbit.lib;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.AmqpHeaders;
 import org.springframework.messaging.Message;
@@ -17,7 +17,7 @@ public class Consumer {
     /**
      * ログ出力
      */
-    private Logger logger = LoggerFactory.getLogger(Consumer.class);
+    protected final Log logger = LogFactory.getLog(Consumer.class);
 
     /**
      * 受信
